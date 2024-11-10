@@ -1,0 +1,129 @@
+<!-- homepage.component.html -->
+<div class="homepage-container">
+  <header class="header">
+    <a href="/" class="logo">
+      <span class="logo-icon">⚡</span>
+      Smart Sync
+    </a>
+    <button class="login-btn" (click)="onLogin()" [disabled]="isLoading">
+      <span *ngIf="!isLoading">LOGIN</span>
+      <span *ngIf="isLoading" class="loading-spinner"></span>
+    </button>
+  </header>
+
+  <section class="hero-section">
+    <div class="hero-content">
+      <h1>Welcome to Smart Sync</h1>
+      <p>AI powered task scheduler that helps you work smarter</p>
+
+      <!-- Show error message if exists -->
+      <div class="error-message" *ngIf="error">
+        {{ error }}
+      </div>
+
+      <button class="cta-button" (click)="onLogin()" [disabled]="isLoading">
+        <span *ngIf="!isLoading">Get Started with Google</span>
+        <span *ngIf="isLoading" class="loading-spinner"></span>
+        <svg
+          *ngIf="!isLoading"
+          xmlns="http://www.w3.org/2000/svg"
+          width="20"
+          height="20"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <line x1="5" y1="12" x2="19" y2="12"></line>
+          <polyline points="12 5 19 12 12 19"></polyline>
+        </svg>
+      </button>
+    </div>
+  </section>
+
+  <section class="steps-section">
+    <h2>Start in 3 easy steps</h2>
+    <div class="steps-container">
+      <div class="step-card">
+        <div class="step-icon">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="32"
+            height="32"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path>
+            <circle cx="9" cy="7" r="4"></circle>
+            <path d="M20 8v6"></path>
+            <path d="M23 11h-6"></path>
+          </svg>
+        </div>
+        <h3>Register</h3>
+        <p>
+          Create your account in seconds with our streamlined signup process
+        </p>
+      </div>
+
+      <div class="step-card">
+        <div class="step-icon">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="32"
+            height="32"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <line x1="8" y1="6" x2="21" y2="6"></line>
+            <line x1="8" y1="12" x2="21" y2="12"></line>
+            <line x1="8" y1="18" x2="21" y2="18"></line>
+            <line x1="3" y1="6" x2="3.01" y2="6"></line>
+            <line x1="3" y1="12" x2="3.01" y2="12"></line>
+            <line x1="3" y1="18" x2="3.01" y2="18"></line>
+          </svg>
+        </div>
+        <h3>Add Activities</h3>
+        <p>Input your tasks and preferences for optimal AI-driven scheduling</p>
+      </div>
+
+      <div class="step-card">
+        <div class="step-icon">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="32"
+            height="32"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path
+              d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"
+            ></path>
+            <path d="M14 2v6h6"></path>
+            <path d="M16 13H8"></path>
+            <path d="M16 17H8"></path>
+            <path d="M10 9H8"></path>
+          </svg>
+        </div>
+        <h3>Get Recommendations</h3>
+        <p>
+          Receive personalized schedule suggestions optimized for your
+          productivity
+        </p>
+      </div>
+    </div>
+  </section>
+</div>

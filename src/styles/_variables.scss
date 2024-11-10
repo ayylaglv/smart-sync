@@ -1,0 +1,111 @@
+// src/styles/_variables.scss
+$colors: (
+  "primary": (
+    "base": #7c3aed,
+    // Rich purple
+    "light": #9f67ff,
+    // Light purple
+    "dark": #5b21b6,
+    // Dark purple
+    "contrast": #ffffff // White,
+  ),
+  "accent": (
+    "base": #10b981,
+    // Emerald green
+    "light": #34d399,
+    // Light green
+    "dark": #059669 // Dark green,
+  ),
+  "background": (
+    "dark": #171717,
+    // Near black
+    "light": #fafafa,
+    // Light gray
+    "gradient": linear-gradient(135deg, #7c3aed 0%, #3b82f6 100%)
+      // Purple to blue gradient,
+  ),
+  "neutral": (
+    "white": #ffffff,
+    "50": #fafafa,
+    "100": #f4f4f5,
+    "200": #e4e4e7,
+    "300": #d4d4d8,
+    "400": #a1a1aa,
+    "500": #71717a,
+    "600": #52525b,
+    "700": #3f3f46,
+    "800": #27272a,
+    "900": #18181b,
+  ),
+);
+
+$spacing: (
+  "1": 0.25rem,
+  "2": 0.5rem,
+  "3": 0.75rem,
+  "4": 1rem,
+  "6": 1.5rem,
+  "8": 2rem,
+  "12": 3rem,
+  "16": 4rem,
+);
+
+$font-sizes: (
+  "base": 1rem,
+  "lg": 1.125rem,
+  "xl": 1.25rem,
+  "2xl": 1.5rem,
+  "3xl": 1.875rem,
+  "4xl": 2.25rem,
+);
+
+$font-weights: (
+  "normal": 400,
+  "medium": 500,
+  "semibold": 600,
+  "bold": 700,
+);
+
+$shadows: (
+  "sm": "0 1px 2px rgba(0, 0, 0, 0.05)",
+  "md": "0 4px 6px rgba(0, 0, 0, 0.1)",
+  "lg": "0 10px 15px rgba(0, 0, 0, 0.1)",
+);
+
+$border-radius: (
+  "sm": 0.125rem,
+  "md": 0.25rem,
+  "lg": 0.5rem,
+);
+
+// Mixins
+@mixin responsive($width) {
+  @media screen and (max-width: $width) {
+    @content;
+  }
+}
+
+// Functions
+@function get-color($type, $shade) {
+  @return map-get(map-get($colors, $type), $shade);
+}
+
+@function get-spacing($size) {
+  @return map-get($spacing, $size);
+}
+
+@function get-font-size($size) {
+  @return map-get($font-sizes, $size);
+}
+
+@function get-font-weight($weight) {
+  @return map-get($font-weights, $weight);
+}
+
+@function get-shadow($size) {
+  @return map-get($shadows, $size);
+}
+
+@function get-radius($size) {
+  @return map-get($border-radius, $size);
+}
