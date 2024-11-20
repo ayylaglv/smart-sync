@@ -15,9 +15,10 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
+import { AiRecommendationsComponent } from './components/ai-recommendations/ai-recommendations.component';
 
 @NgModule({
-  declarations: [AppComponent, HomepageComponent, DashboardComponent],
+  declarations: [AppComponent, HomepageComponent, DashboardComponent, AiRecommendationsComponent],
   imports: [
     BrowserModule,
     ReactiveFormsModule,

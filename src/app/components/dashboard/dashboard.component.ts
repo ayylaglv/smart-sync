@@ -30,6 +30,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
   private authSubscription?: Subscription;
   recommendations: string = '';
   isLoadingRecommendations = false;
+  selectedNotes: Note[] = [];
 
   constructor(
     private authService: AuthService,
@@ -199,24 +200,30 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
   toggleNoteSelection(note: Note) {
     note.selected = !note.selected;
+    this.updateSelectedNotes();
   }
 
-  hasSelectedActivities(): boolean {
-    return this.notes.some((note) => note.selected);
+  // Keep track of selected notes
+  private updateSelectedNotes() {
+    this.selectedNotes = this.notes.filter((note) => note.selected);
   }
 
   async getAIRecommendations() {
-    const selectedNotes = this.notes.filter((note) => note.selected);
-
-    if (selectedNotes.length === 0) {
+    if (this.selectedNotes.length === 0) {
       console.log('No activities selected');
       return;
     }
 
+    const officeTimeFrom = this.selectedNotes[0]?.officeTimeFrom || '09:00';
+    const officeTimeTo = this.selectedNotes[0]?.officeTimeTo || '17:00';
+
     try {
       this.isLoadingRecommendations = true;
+
       this.recommendations = await this.geminiService.getRecommendations(
-        selectedNotes
+        this.selectedNotes,
+        this.selectedOfficeTimeFrom,
+        this.selectedOfficeTimeTo
       );
     } catch (error) {
       console.error('Error getting recommendations:', error);
@@ -224,5 +231,17 @@ export class DashboardComponent implements OnInit, OnDestroy {
     } finally {
       this.isLoadingRecommendations = false;
     }
+  }
+
+  hasSelectedActivities(): boolean {
+    return this.notes.some((note) => note.selected);
+  }
+
+  get selectedOfficeTimeFrom(): string {
+    return this.selectedNotes[0]?.officeTimeFrom || '09:00';
+  }
+
+  get selectedOfficeTimeTo(): string {
+    return this.selectedNotes[0]?.officeTimeTo || '17:00';
   }
 }

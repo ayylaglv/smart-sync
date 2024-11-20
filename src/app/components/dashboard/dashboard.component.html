@@ -291,18 +291,12 @@
         class="recommendations-section"
         *ngIf="recommendations || isLoadingRecommendations"
       >
-        <h2>AI Recommendations</h2>
-        <div class="recommendations-content">
-          <div *ngIf="isLoadingRecommendations" class="loading-spinner">
-            Loading recommendations...
-          </div>
-          <div
-            *ngIf="!isLoadingRecommendations && recommendations"
-            class="recommendations-text"
-          >
-            <pre>{{ recommendations }}</pre>
-          </div>
-        </div>
+        <app-ai-recommendations
+          [rawResponse]="recommendations"
+          [isLoading]="isLoadingRecommendations"
+          [officeTimeFrom]="selectedOfficeTimeFrom"
+          [officeTimeTo]="selectedOfficeTimeFrom"
+        ></app-ai-recommendations>
       </div>
     </section>
   </main>

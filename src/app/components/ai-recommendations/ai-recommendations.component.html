@@ -1,0 +1,202 @@
+<!-- src/app/components/ai-recommendations/ai-recommendations.component.html -->
+<div class="recommendations-section">
+  <h2>AI Recommendations</h2>
+  <div class="work-hours-info">
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="20"
+      height="20"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="2"
+    >
+      <circle cx="12" cy="12" r="10"></circle>
+      <path d="M12 6v6l4 2"></path>
+    </svg>
+    <span
+      >Recommendations scheduled before/after work hours ({{
+        officeTimeFrom || "9 AM"
+      }}
+      - {{ officeTimeTo || "5 PM" }})</span
+    >
+  </div>
+
+  <div class="recommendations-content">
+    <!-- Optimal Scheduling Section -->
+    <div class="recommendation-section">
+      <h3>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="20"
+          height="20"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+        >
+          <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+          <line x1="16" y1="2" x2="16" y2="6"></line>
+          <line x1="8" y1="2" x2="8" y2="6"></line>
+          <line x1="3" y1="10" x2="21" y2="10"></line>
+        </svg>
+        1. Optimal Scheduling Order
+      </h3>
+
+      <div class="time-blocks">
+        <div class="time-block">
+          <h4>Early Morning (Before {{ officeTimeFrom }})</h4>
+          <ul>
+            <li *ngFor="let task of earlyMorningTasks">{{ task }}</li>
+          </ul>
+        </div>
+
+        <div class="time-block">
+          <h4>Evening (After {{ officeTimeTo }})</h4>
+          <ul>
+            <li *ngFor="let task of eveningTasks">{{ task }}</li>
+          </ul>
+        </div>
+
+        <div class="time-block">
+          <h4>Weekends</h4>
+          <p *ngIf="!weekendTasks.length" class="no-tasks">
+            No weekend activities listed
+          </p>
+          <ul *ngIf="weekendTasks.length">
+            <li *ngFor="let task of weekendTasks">{{ task }}</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Location Groups Section -->
+    <div class="recommendation-section">
+      <h3>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="20"
+          height="20"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+        >
+          <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"></path>
+          <circle cx="12" cy="10" r="3"></circle>
+        </svg>
+        2. Grouping Activities by Location
+      </h3>
+      <div class="location-groups">
+        <div class="location-group" *ngFor="let group of locationGroups">
+          <h4>{{ group.location }}</h4>
+          <ul>
+            <li *ngFor="let activity of group.activities">{{ activity }}</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Time Management Tips Section -->
+    <div class="recommendation-section">
+      <h3>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="20"
+          height="20"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+        >
+          <circle cx="12" cy="12" r="10"></circle>
+          <polyline points="12 6 12 12 16 14"></polyline>
+        </svg>
+        3. Time Management Tips
+      </h3>
+      <ul class="management-tips">
+        <li *ngFor="let tip of timeManagementTips">{{ tip }}</li>
+      </ul>
+    </div>
+
+    <!-- Conflicts Section -->
+    <div class="recommendation-section">
+      <h3>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="20"
+          height="20"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+        >
+          <path
+            d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"
+          ></path>
+          <line x1="12" y1="9" x2="12" y2="13"></line>
+          <line x1="12" y1="17" x2="12.01" y2="17"></line>
+        </svg>
+        4. Potential Conflicts or Issues
+      </h3>
+      <div class="conflicts no-conflicts">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="20"
+          height="20"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+        >
+          <path d="M22 11.08V12a10 10 0 11-5.93-9.14"></path>
+          <polyline points="22 4 12 14.01 9 11.01"></polyline>
+        </svg>
+        No conflicts identified with work hours
+      </div>
+    </div>
+
+    <!-- Efficiency Recommendations Section -->
+    <div class="recommendation-section">
+      <h3>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="20"
+          height="20"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+        >
+          <path d="M22 12h-4l-3 9L9 3l-3 9H2"></path>
+        </svg>
+        5. Recommendations for Improving Efficiency
+      </h3>
+      <div class="efficiency-subsections">
+        <div class="subsection">
+          <h4>Activity Combinations</h4>
+          <ul>
+            <li *ngFor="let combo of activityCombinations">{{ combo }}</li>
+          </ul>
+        </div>
+
+        <div class="subsection">
+          <h4>High-Priority Task Timing</h4>
+          <p *ngIf="!highPriorityTiming.length" class="no-tasks">
+            No high-priority tasks identified
+          </p>
+          <ul *ngIf="highPriorityTiming.length">
+            <li *ngFor="let timing of highPriorityTiming">{{ timing }}</li>
+          </ul>
+        </div>
+
+        <div class="subsection">
+          <h4>Work-Life Balance Strategies</h4>
+          <ul>
+            <li *ngFor="let strategy of workLifeStrategies">{{ strategy }}</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
