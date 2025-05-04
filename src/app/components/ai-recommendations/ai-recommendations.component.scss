@@ -63,8 +63,9 @@
   margin-bottom: 2rem;
   padding: 1.5rem;
   background: #f8fafc;
-  border-radius: 8px;
+  border-radius: 12px;
   border: 1px solid #e2e8f0;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
   transition: all 0.3s ease;
 
   &:hover {
@@ -87,173 +88,107 @@
   }
 }
 
-.work-hours-indicator {
-  background-color: #fee2e2;
-  color: #991b1b;
-  padding: 0.5rem;
-  border-radius: 4px;
-  margin-bottom: 1rem;
-  font-size: 0.875rem;
-  font-weight: 500;
-  text-align: center;
-}
-
-.schedule-list {
-  .schedule-item {
-    display: flex;
-    gap: 1rem;
-    padding: 0.75rem;
-    border-bottom: 1px solid #e5e7eb;
-    transition: background-color 0.2s ease;
-
-    &:last-child {
-      border-bottom: none;
-    }
-
-    &.outside-work-hours {
-      background-color: #f0fdf4;
-      border-left: 3px solid #059669;
-    }
-
-    .time {
-      font-weight: 600;
-      color: #4b5563;
-      min-width: 120px;
-    }
-
-    .activity {
-      color: #1f2937;
-      flex: 1;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-
-    .time-badge {
-      display: inline-block;
-      padding: 0.25rem 0.5rem;
-      background-color: #059669;
-      color: white;
-      border-radius: 4px;
-      font-size: 0.75rem;
-    }
-  }
-}
-
-.location-groups {
-  .location-group {
-    margin-bottom: 1.5rem;
-
-    &:last-child {
-      margin-bottom: 0;
-    }
-
-    .location {
-      font-weight: 600;
-      color: #4b5563;
-      margin-bottom: 0.5rem;
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-
-      svg {
-        color: #7c3aed;
-      }
-    }
-
-    .activities {
-      padding-left: 1.5rem;
-
-      .activity {
-        color: #1f2937;
-        padding: 0.25rem 0;
-      }
-    }
-  }
-}
-
-.tips-list,
-.efficiency-list {
-  list-style-type: none;
-  padding: 0;
-
-  li {
-    padding: 0.75rem 0;
-    color: #1f2937;
-    display: flex;
-    align-items: flex-start;
-
-    &:before {
-      content: "•";
-      color: #7c3aed;
-      font-weight: bold;
-      margin-right: 0.75rem;
-    }
-  }
-}
-
-.conflicts {
-  color: #1f2937;
-  padding: 1rem;
-  background: #fee2e2;
-  border-radius: 6px;
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-
-  &.no-conflicts {
-    background: #f0fdf4;
-    color: #059669;
-
-    svg {
-      color: #059669;
-    }
-  }
-}
-
-// Responsive styles
-@media (max-width: 768px) {
-  .recommendations-section {
-    padding: 1rem;
-  }
-
-  .schedule-list {
-    .schedule-item {
-      flex-direction: column;
-      gap: 0.5rem;
-
-      .time {
-        min-width: auto;
-      }
-
-      .activity {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 0.5rem;
-      }
-    }
-  }
-}
-// Add to ai-recommendations.component.scss
-
+// Time blocks layout
 .time-blocks {
   display: grid;
   gap: 1.5rem;
   margin-top: 1rem;
 
-  .time-block {
-    background: #f8fafc;
-    padding: 1rem;
+  @media (min-width: 768px) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.time-block {
+  background: white;
+  padding: 1.25rem;
+  border-radius: 8px;
+  border: 1px solid #e2e8f0;
+  margin-bottom: 16px;
+
+  @media (min-width: 768px) {
+    margin-bottom: 0;
+  }
+
+  h4 {
+    color: #4b5563;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid #e5e7eb;
+    font-size: 1rem;
+  }
+
+  ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .no-tasks {
+    color: #94a3b8;
+    font-style: italic;
+    text-align: center;
+    padding: 1rem 0;
+    font-size: 0.875rem;
+  }
+}
+
+// Task with time styling - critical for displaying time information
+.task-with-time {
+  margin-bottom: 1rem;
+  display: flex;
+  flex-direction: column;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+
+  .task-time {
+    background: #7c3aed;
+    color: white;
+    padding: 0.25rem 0.75rem;
+    border-radius: 4px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    display: inline-block;
+    margin-bottom: 0.5rem;
+    align-self: flex-start;
+  }
+
+  .task-title {
+    display: flex;
+    gap: 0.5rem;
+    align-items: flex-start;
+
+    &:before {
+      content: "•";
+      color: #7c3aed;
+      flex-shrink: 0;
+    }
+  }
+}
+
+// Location groups styling
+.location-groups {
+  .location-group {
+    margin-bottom: 1.5rem;
+    background: white;
+    padding: 1.25rem;
     border-radius: 8px;
     border: 1px solid #e2e8f0;
 
+    &:last-child {
+      margin-bottom: 0;
+    }
+
     h4 {
-      color: #4b5563;
+      color: #7c3aed;
       font-weight: 600;
-      margin-bottom: 0.75rem;
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
+      margin-bottom: 1rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 1px solid #e5e7eb;
+      font-size: 1rem;
     }
 
     ul {
@@ -262,36 +197,144 @@
       margin: 0;
 
       li {
-        padding: 0.5rem 0;
-        color: #1f2937;
         display: flex;
         align-items: flex-start;
-        gap: 0.5rem;
+        padding: 0.5rem 0;
 
         &:before {
           content: "•";
           color: #7c3aed;
+          margin-right: 0.75rem;
         }
       }
     }
+  }
 
-    .no-tasks {
-      color: #6b7280;
-      font-style: italic;
+  .no-locations {
+    color: #94a3b8;
+    font-style: italic;
+    text-align: center;
+    padding: 1rem;
+    font-size: 0.875rem;
+  }
+}
+
+// Management tips styling
+.tips-list,
+.management-tips {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  background: white;
+  border-radius: 8px;
+  border: 1px solid #e2e8f0;
+  overflow: hidden;
+
+  li {
+    padding: 1rem;
+    border-bottom: 1px solid #e5e7eb;
+    display: flex;
+    align-items: flex-start;
+
+    &:last-child {
+      border-bottom: none;
+    }
+
+    &:before {
+      content: "•";
+      color: #7c3aed;
+      margin-right: 0.75rem;
+      font-weight: bold;
+    }
+
+    .bullet {
+      color: #7c3aed;
+      margin-right: 0.75rem;
+      font-weight: bold;
     }
   }
 }
 
+.no-tips {
+  color: #94a3b8;
+  font-style: italic;
+  text-align: center;
+  padding: 1rem;
+  font-size: 0.875rem;
+  background: white;
+  border-radius: 8px;
+  border: 1px solid #e2e8f0;
+}
+
+// Conflicts section styling
+.conflicts-container {
+  .no-conflicts {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 1rem;
+    border-radius: 8px;
+    background: #f0fdf4;
+    color: #059669;
+
+    svg {
+      color: #059669;
+      flex-shrink: 0;
+    }
+  }
+
+  .conflicts-list {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    background: #fef2f2;
+    border-radius: 8px;
+    border: 1px solid #fee2e2;
+    overflow: hidden;
+
+    li {
+      padding: 1rem;
+      border-bottom: 1px solid #fee2e2;
+      display: flex;
+      align-items: flex-start;
+      color: #dc2626;
+
+      &:last-child {
+        border-bottom: none;
+      }
+
+      .bullet {
+        color: #dc2626;
+        margin-right: 0.75rem;
+        font-weight: bold;
+      }
+    }
+  }
+}
+
+// Efficiency recommendations styling
 .efficiency-subsections {
   display: grid;
   gap: 1.5rem;
   margin-top: 1rem;
 
+  @media (min-width: 768px) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
   .subsection {
+    background: white;
+    padding: 1.25rem;
+    border-radius: 8px;
+    border: 1px solid #e2e8f0;
+
     h4 {
-      color: #4b5563;
+      color: #7c3aed;
       font-weight: 600;
-      margin-bottom: 0.75rem;
+      margin-bottom: 1rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 1px solid #e5e7eb;
+      font-size: 1rem;
     }
 
     ul {
@@ -301,40 +344,46 @@
 
       li {
         padding: 0.5rem 0;
-        color: #1f2937;
         display: flex;
         align-items: flex-start;
-        gap: 0.5rem;
+
+        .bullet {
+          color: #7c3aed;
+          margin-right: 0.75rem;
+          flex-shrink: 0;
+        }
 
         &:before {
           content: "•";
           color: #7c3aed;
+          margin-right: 0.75rem;
+          display: none;
         }
       }
+    }
+
+    .no-items,
+    .no-tasks {
+      color: #94a3b8;
+      font-style: italic;
+      text-align: center;
+      padding: 1rem 0;
+      font-size: 0.875rem;
     }
   }
 }
 
-.no-conflicts {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-  padding: 1rem;
-  background: #f0fdf4;
-  border-radius: 8px;
-  color: #059669;
-
-  svg {
-    color: #059669;
-  }
-}
-
-@media (min-width: 768px) {
-  .time-blocks {
-    grid-template-columns: repeat(3, 1fr);
+// Responsive adjustments
+@media (max-width: 768px) {
+  .recommendations-section {
+    padding: 1rem;
   }
 
   .efficiency-subsections {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: 1fr;
+  }
+
+  .time-blocks {
+    grid-template-columns: 1fr;
   }
 }

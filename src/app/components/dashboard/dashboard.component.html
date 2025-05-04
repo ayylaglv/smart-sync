@@ -286,7 +286,6 @@
         </div>
       </div>
 
-      <!-- AI Recommendations -->
       <div
         class="recommendations-section"
         *ngIf="recommendations || isLoadingRecommendations"
@@ -295,7 +294,7 @@
           [rawResponse]="recommendations"
           [isLoading]="isLoadingRecommendations"
           [officeTimeFrom]="selectedOfficeTimeFrom"
-          [officeTimeTo]="selectedOfficeTimeFrom"
+          [officeTimeTo]="selectedOfficeTimeTo"
         ></app-ai-recommendations>
       </div>
     </section>

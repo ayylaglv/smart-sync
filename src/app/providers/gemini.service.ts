@@ -8,8 +8,7 @@ import { environment } from '../../environments/environment';
 })
 export class GeminiService {
   private readonly apiKey = environment.geminiApiKey;
-  private readonly apiUrl =
-    'https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent';
+  private readonly apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent`;
 
   constructor(private http: HttpClient) {}
 
@@ -34,6 +33,7 @@ export class GeminiService {
           ],
         })
         .toPromise();
+
       return this.parseResponse(response);
     } catch (error) {
       console.error('Error calling Gemini API:', error);
@@ -49,7 +49,7 @@ export class GeminiService {
     return `
       I need help organizing these activities outside of work hours (${officeTimeFrom} - ${officeTimeTo}) 
       since I'm busy with work during those hours.
-
+  
       Here are my activities:
       ${notes
         .map(
@@ -63,30 +63,49 @@ export class GeminiService {
       `
         )
         .join('\n')}
-
-      Please provide:
-      1. Optimal Scheduling Order that avoids work hours (${officeTimeFrom} - ${officeTimeTo}), preferably scheduling activities:
-         - Early morning (before ${officeTimeFrom})
-         - Evening (after ${officeTimeTo})
-         - Weekends if needed
-      2. Group activities by location to minimize travel time
-      3. Time management tips for balancing these activities with work
-      4. Potential conflicts with work hours or other commitments
-      5. Recommendations for improving efficiency, including:
-         - Which activities could be combined
-         - Best times for high-priority tasks
-         - How to handle activities that might overlap with work hours
-         - Strategies for maintaining work-life balance
-
-      Consider:
-      - Energy levels at different times of day
-      - Travel time between locations
-      - Priority of tasks
-      - Activities that require specific clothing or preparation
-      - Buffer time needed between work and other activities
+  
+      Please provide a structured response in the following exact format with numbered sections and bold headings:
+  
+      **1. Optimal Scheduling Order**
+      Recommend specific times for each activity, scheduling them outside work hours (${officeTimeFrom} - ${officeTimeTo}). Use this exact format with times:
+      - 6:30 AM: [Activity Name] - [brief reason or description]
+      - 7:00-7:45 AM: [Activity Name] - [brief reason or description]
+      - 6:00 PM: [Activity Name] - [brief reason or description]
+      - 8:30 PM: [Activity Name] - [brief reason or description]
+      - Weekend (Saturday 10:00 AM): [Activity Name] - [brief reason or description]
+  
+      Organize activities into these time categories:
+      - Early Morning (before ${officeTimeFrom})
+      - Evening (after ${officeTimeTo})
+      - Weekend
+  
+      **2. Grouping Activities by Location**
+      List recommendations in the exact format:
+      - [Location Name]: [Activity 1], [Activity 2], etc.
       
-      Please format the response in a clear, structured way with specific time recommendations 
-      that work around the workday of ${officeTimeFrom} - ${officeTimeTo}. Format it to json.
+      **3. Time Management Tips**
+      List 3-5 specific tips for balancing these activities with work:
+      - [Tip 1]
+      - [Tip 2]
+      - [Tip 3]
+      
+      **4. Potential Conflicts**
+      List any potential scheduling conflicts (or state if none are found):
+      - [Conflict 1]
+      - [Conflict 2]
+      
+      **5. Recommendations for Improving Efficiency**
+      Include the following subsections with specific timing recommendations:
+      - Activity combinations: [list specific activities that could be combined with suggested times]
+      - High-priority task timing: [recommend optimal times for high-priority tasks]
+      - Work-life balance strategies: [specific strategies to maintain balance with time recommendations]
+  
+      IMPORTANT REQUIREMENTS:
+      1. Always suggest SPECIFIC CLOCK TIMES for each activity (e.g., "7:30 AM", "6:15 PM")
+      2. Each activity must have a recommended time that is outside work hours (${officeTimeFrom} - ${officeTimeTo})
+      3. Follow the exact formatting with section numbers and headings as shown above with the ** markers
+      4. Format each bullet point with a hyphen (-)
+      5. Keep responses concise and actionable
     `;
   }
 
